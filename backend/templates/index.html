@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cohere AI Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset & Font */
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      padding: 20px;
+      background: #3d5afe;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Chat */
+    .chat-area {
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+    }
+    .message {
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .user {
+      text-align: right;
+      color: #1e88e5;
+    }
+    .bot {
+      text-align: left;
+      color: #43a047;
+    }
+
+    /* Input */
+    .input-area {
+      display: flex;
+      border-top: 1px solid #eee;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+    button {
+      background: #3d5afe;
+      color: white;
+      border: none;
+      padding: 0 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #2e4cc8;
+    }
+
+    /* Scrollbar styling */
+    .chat-area::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chat-area::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">💬 Cohere Chatbot</div>
+
+    <div class="chat-area" id="messages">
+      <!-- Chat messages go here -->
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your message..." onkeydown="if(event.key === 'Enter') sendMessage()">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage("You", message, "user");
+      input.value = "";
+
+      fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+      })
+      .then(response => response.json())
+      .then(data => {
+        appendMessage("Bot", data.reply, "bot");
+      })
+      .catch(error => {
+        appendMessage("Bot", "⚠️ Error: " + error.message, "bot");
+      });
+    }
+
+    function appendMessage(sender, text, className) {
+      const messagesDiv = document.getElementById("messages");
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `message ${className}`;
+      messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      messagesDiv.appendChild(messageDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+  </script>
+</body>
+</html>
