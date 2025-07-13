@@ -1,71 +1,35 @@
-# 💬 Cohere Chatbot API (Flask App)
+💬 AI Chatbot using Cohere API
 
-A responsive and modern AI chatbot built using **Flask** for the backend and **Cohere's NLP API** for intelligent response generation. It features a clean web interface, real-time communication, and professional UI — ideal for learning, demos, and AI integration projects.
+________________________________________
 
----
+🧠 Project Summary
 
-## 🌟 Features
+This project is a full-stack, web-based AI chatbot application built using Python Flask for the backend and Cohere's NLP API for generating intelligent, human-like responses. It enables real-time conversation through a clean and responsive HTML/CSS frontend. The chatbot is enhanced with context-aware memory and optionally stores chat history using MongoDB. This project demonstrates how to integrate an AI language model into a complete web application with persistent storage and a user-friendly interface.
+________________________________________
 
-- ⚡ **Real-time chatbot** using Cohere's `command` model
-- 🧠 Built with **Python (Flask)** for fast backend development
-- 🎨 Modern and clean **HTML + CSS UI**
-- 🔐 API keys managed securely via `.env`
-- 🛡️ `.gitignore` added to protect sensitive files
-- 🌐 Easily deployable on platforms like Render, Replit, or Heroku
+🔧 Features
 
----
+•	✅ AI-powered chat using Cohere’s Command Language Model
+•	🧠 Contextual memory: Maintains the last 10 messages to keep the flow natural
+•	💾 Persistent chat history: Stores messages using MongoDB per user session
+•	🔁 Reset support: Clear current session or delete full chat history
+•	📱 Responsive UI: Works on mobile, tablet, and desktop devices
+•	🎨 Clean layout: Includes styled, color-coded chat bubbles and input area
 
-## 📁 Project Structure
 
-chatbot-app/
-├── backend/
-│ └── app.py # Flask app logic
-├── templates/
-│ └── index.html # Chatbot UI
-├── .env # Contains COHERE_API_KEY (not pushed)
-├── .gitignore
-├── README.md
+| 💡 Category          | 🛠️ Technology           | 📄 Purpose / Role                                            |
+| -------------------- | ------------------------ | ------------------------------------------------------------ |
+| Programming Language | **Python**               | Backend development and AI API integration                   |
+| Web Framework        | **Flask**                | Handles routes, user requests, and templates                 |
+| AI/NLP API           | **Cohere API**           | Generates AI-based responses from user input                 |
+| Database             | **MongoDB**              | Stores chat history and session messages                     |
+| Frontend (UI)        | **HTML & CSS**           | Builds and styles the chatbot interface for all device types |
+| Client-side Logic    | **JavaScript (Vanilla)** | Sends messages and handles frontend updates dynamically      |
+| Version Control      | **Git**                  | Tracks code changes and history                              |
+| Repository Hosting   | **GitHub**               | Hosts and publishes the project code                         |
+| Terminal Tool        | **Git Bash / CMD**       | Runs local Git, Flask server, and pip commands               |
 
-yaml
-Copy
-Edit
-
----
-
-## ⚙️ Tech Stack
-
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Python (Flask)
-- **AI Engine**: [Cohere API](https://cohere.com)
-- **Hosting Ready**: Render / Replit / Heroku
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Devinarukula57/Chatbot_API.git
-cd Chatbot_API
-2. Install Python dependencies
-bash
-Copy
-Edit
-pip install flask cohere python-dotenv
-3. Set up .env file
-Create a .env file in the root directory:
-
-env
-Copy
-Edit
+.env file
 COHERE_API_KEY=your_actual_cohere_api_key
-🔒 Never share your API key publicly!
-
-4. Run the Flask app
-bash
-Copy
-Edit
-python backend/app.py
-Then open http://localhost:5000 in your browser.
+MONGO_URI=mongodb://localhost:27017
 
